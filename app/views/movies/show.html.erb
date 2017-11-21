@@ -1,0 +1,48 @@
+<p id="notice"><%= notice %></p>
+
+
+<p>
+  <strong>Img: </strong>
+  <%= image_tag @movie.img_url %>
+</p>
+
+<p>
+  <strong>Title: </strong>
+  <%= @movie.title %>
+</p>
+
+<p>
+  <strong>Desc: </strong>
+  <%= @movie.desc %>
+</p>
+
+
+<!-- 평균평점: <%= @movie.reviews.average(:rating) %><br> -->
+평균평점: <%= @movie.avg %>
+
+<%= form_tag("/movies/#{@movie.id}/reviews", method: :get) do %>
+<p>
+  <strong>평점: </strong>
+  <%= radio_button_tag(:rating, "1")%>
+  <%= label_tag(:point_1, "1")%>
+  <%= radio_button_tag(:rating, "2")%>
+  <%= label_tag(:point_2, "2")%>
+  <%= radio_button_tag(:rating, "3")%>
+  <%= label_tag(:point_3, "3")%>
+  <%= radio_button_tag(:rating, "4")%>
+  <%= label_tag(:point_4, "4")%>
+  <%= radio_button_tag(:rating, "5")%>
+  <%= label_tag(:point_5, "5")%>
+</p>
+  <%= text_field_tag(:comment)%>
+  <%= submit_tag("리뷰제출")%>
+<% end %>
+
+<% @movie.reviews.each do |review| %>
+  <p>평점: <%= review.rating %></p>
+  <p>리뷰: <%= review.comment %></p>
+<% end %>
+
+
+<%= link_to 'Edit', edit_movie_path(@movie) %> |
+<%= link_to 'Back', movies_path %>
