@@ -1,10 +1,14 @@
 class MoviesController < ApplicationController
+  load_and_authorize_resource #cancancan
   before_action :set_movie, only: [:show, :edit, :update, :destroy]
+  #before_action :check_admin, only: [:edit, :update, :destroy]
+
 
   # GET /movies
   # GET /movies.json
   def index
-    @movies = Movie.all
+    @movies = Movie.order(:updated_at).reverse_order.page params[:page]
+    # authorize! :read, Movie
   end
 
   # GET /movies/1
@@ -24,15 +28,18 @@ class MoviesController < ApplicationController
     # else
     #   @avg = total.to_f / @movie.reviews.count
     # end
+    # authorize! :read, Movie
   end
 
   # GET /movies/new
   def new
     @movie = Movie.new
+    # authorize! :create, Movie
   end
 
   # GET /movies/1/edit
   def edit
+    # authorize! :update, Movie
   end
 
   # POST /movies
@@ -49,6 +56,7 @@ class MoviesController < ApplicationController
         format.json { render json: @movie.errors, status: :unprocessable_entity }
       end
     end
+    # authorize! :create, Movie
   end
 
   # PATCH/PUT /movies/1
@@ -63,6 +71,7 @@ class MoviesController < ApplicationController
         format.json { render json: @movie.errors, status: :unprocessable_entity }
       end
     end
+    # authorize! :update, Movie
   end
 
   # DELETE /movies/1
@@ -73,16 +82,23 @@ class MoviesController < ApplicationController
       format.html { redirect_to movies_url, notice: 'Movie was successfully destroyed.' }
       format.json { head :no_content }
     end
+    # authorize! :destroy, Movie
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+  # Use callbacks to share common setup or constraints between actions.
+    def check_admin
+      unless current_user.admin?
+          redirect_to root_path
+      end
+    end
+
     def set_movie
       @movie = Movie.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def movie_params
-      params.require(:movie).permit(:title, :desc, :img_url)
+      params.require(:movie).permit(:title, :desc, :user_id, :img_url)
     end
 end

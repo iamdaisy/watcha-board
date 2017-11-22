@@ -1,5 +1,10 @@
 source 'https://rubygems.org'
 
+gem 'rails_12factor', group: :production
+gem 'pg', group: :production #postgres 사용하게 해주는 젬
+
+gem 'cancancan', '~> 2.0'
+gem 'kaminari'
 gem 'rest-client'
 gem 'httparty'
 gem 'carrierwave', '~> 1.0'
@@ -9,7 +14,7 @@ gem 'devise-i18n' # internationalization(국제화)
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.9'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+gem 'sqlite3', group: :development
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets

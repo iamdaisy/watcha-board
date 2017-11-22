@@ -2,32 +2,26 @@
 
 <h1>Listing Movies</h1>
 
-<table>
-  <thead>
-    <tr>
-
-      <th>Img</th>
-      <th>Title</th>
-      <th>Desc</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @movies.each do |movie| %>
-      <tr>
-
-        <td><%= image_tag movie.img_url, size:"50x50" %></td>
-        <td><%= movie.title %></td>
-        <td><%= movie.desc %></td>
-        <td><%= link_to 'Show', movie %></td>
-        <td><%= link_to 'Edit', edit_movie_path(movie) %></td>
-        <td><%= link_to 'Destroy', movie, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
 
 <%= link_to 'New Movie', new_movie_path %>
+<div class="container">
+  <div class="row">
+    <% @movies.each do |movie| %>
+    <div class="col-sm-4 col-lg-3 col-xs-6">
+      <div class="card">
+        <img class="card-img-top" src="<%= movie.img_url %>" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title"><%= movie.title %></h5>
+          <p class="card-text"></p>
+          <%= link_to "상세보기", movie, class: "btn btn-primary" %><br>
+          <% if current_user.admin? %>
+          <div class="btn btn-default"><%= link_to 'Edit', edit_movie_path(movie) %></div>
+          <div class="btn btn-default"><%= link_to 'Destroy', movie, method: :delete, data: { confirm: 'Are you sure?' } %></div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
+<%= paginate @movies %>

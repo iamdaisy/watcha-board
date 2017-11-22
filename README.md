@@ -32,7 +32,7 @@
 
   `rake db:migrate`
 
-- image uploader 생성 
+- image uploader 생성
 
   `gem 'carrierwave', '~> 1.0'`
 
@@ -56,9 +56,9 @@
 
 
 
-- 국제화 
+- 국제화
 
-  `gem 'devise-i18n'` 
+  `gem 'devise-i18n'`
 
   config > application.rb 에서 두가지 커멘트 아웃
 
@@ -125,7 +125,7 @@
 
 - review 모델 생성 (댓글 기능 추가하려고)
 
-  `rails g model review movie:references comment:text rating:integer user:references` 
+  `rails g model review movie:references comment:text rating:integer user:references`
 
   `rake db:migrate`
 
@@ -139,10 +139,84 @@
 
 #### Rails.root.join()
 
-```ruvy
+```ruby
 pry(main)> Rails.root.join('app', 'views')
 => #<Pathname:/Users/Dahye/dev/ruby/project/watcha/app/views>
 ```
 
 
+
+
+
+- role 컬럼추가 (admin계정추가)
+
+  `rails g migration add_role_to_users role:string`
+
+  `rake db:migrate`
+
+- user 콘솔창에서 추가하기 (admin, regular)
+
+  `> User.create email: "admin@asdf.com", password: "123123", password_confirmation: "123123", role: "admin"`
+
+  `>User.create email: "regular@asdf.com", password: "123123", password_confirmation: "123123", role: "regular"`
+
+- 권한설정
+
+  - user.rb
+
+  ```ruby
+    def admin?
+      if role == "admin"
+        true
+      else
+        false
+      end
+    end
+  ```
+
+- cancancan
+
+  `gem 'cancancan', '~> 2.0'`
+
+  `rails g cancan:ability`
+
+  - model > ability.rb
+
+    ```ruby
+        user ||= User.new # guest user (not logged in)
+          if user.admin?
+            can :manage, Movie
+          else
+            can :read, Movie
+          end
+    ```
+
+  - movies_controller
+
+    ```ruby
+    load_and_authorize_resource
+    ```
+
+
+
+
+
+### heroku cli 설치
+
+```
+$ brew install heroku/brew/heroku
+```
+
+- login > heroku login
+
+- gemfile
+
+  ```ruby
+  gem 'rails_12factor', group: :production
+  gem 'pg', group: :production #postgres 사용하게 해주는 젬
+
+  gem 'sqlite3', group: :development # 개발그룹으로 옮김
+  ```
+
+  ​
 
