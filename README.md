@@ -354,3 +354,6 @@ User.create([
   ```
 
   ​
+
+#### 게시판 Trix editor 추가
+

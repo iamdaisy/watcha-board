@@ -158,7 +158,6 @@ GEM
     nokogiri (1.8.1)
       mini_portile2 (~> 2.3.0)
     orm_adapter (0.5.0)
-    pg (0.21.0)
     polyamorous (1.3.1)
       activerecord (>= 3.0)
     pry (0.11.3)
@@ -255,6 +254,8 @@ GEM
     thor (0.20.0)
     thread_safe (0.3.6)
     tilt (2.0.8)
+    trix (0.11.0)
+      rails (> 4.1, < 5.2)
     turbolinks (5.0.1)
       turbolinks-source (~> 5)
     turbolinks-source (5.0.3)
@@ -294,7 +295,6 @@ DEPENDENCIES
   jquery-rails
   kaminari
   mini_magick
-  pg
   pry-rails
   rails (= 4.2.9)
   rails_12factor
@@ -304,6 +304,7 @@ DEPENDENCIES
   sdoc (~> 0.4.0)
   spring
   sqlite3
+  trix
   turbolinks
   uglifier (>= 1.3.0)
   web-console (~> 2.0)

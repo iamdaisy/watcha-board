@@ -1,10 +1,12 @@
 source 'https://rubygems.org'
 
+
+gem 'trix'
 gem 'aws-sdk-rails'
 gem "mini_magick"
 gem 'fog-aws'
 gem 'rails_12factor', group: :production
-gem 'pg', group: :production #postgres 사용하게 해주는 젬
+# gem 'pg', group: :production #postgres 사용하게 해주는 젬
 
 gem 'cancancan', '~> 2.0'
 gem 'kaminari'
