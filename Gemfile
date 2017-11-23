@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 
+gem 'aws-sdk-rails'
+gem "mini_magick"
+gem 'fog-aws'
 gem 'rails_12factor', group: :production
 gem 'pg', group: :production #postgres 사용하게 해주는 젬
 
@@ -10,7 +13,7 @@ gem 'httparty'
 gem 'carrierwave', '~> 1.0'
 gem 'devise'
 gem 'devise-i18n' # internationalization(국제화)
-
+gem 'faker'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.9'
 # Use sqlite3 as the database for Active Record

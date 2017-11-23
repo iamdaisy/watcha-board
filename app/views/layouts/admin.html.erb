@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>왓챠 : 영화 평점 서비스</title>
+  <title>왓챠 : 관리자 페이지</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -13,15 +13,14 @@
 
 </head>
 <body>
+  <%= render 'layouts/admin_header'%>
+  <div class="container-fluid">
+    <div class="row">
+      <%= render 'layouts/admin_menu'%>
 
-<%= render 'layouts/header' %>
-
-<!--
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p> -->
-
+    </div>
+  </div>
 <%= yield %>
-<%= render 'layouts/footer' %>
 
 </body>
 </html>

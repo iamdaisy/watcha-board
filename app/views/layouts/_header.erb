@@ -1,0 +1,60 @@
+<header>
+  <div class="collapse bg-dark" id="navbarHeader">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8 py-4">
+          <h4 class="text-white">왓챠!</h4>
+          <p class="text-muted">영화 평점 서비스 !</p>
+        </div>
+        <div class="col-sm-4 py-4">
+          <h4 class="text-white">Contact</h4>
+          <ul class="list-unstyled">
+            <li><%= link_to '로그인', new_user_session_path, class: "text-white" %></li>
+            <li><%= link_to '로그아웃', destroy_user_session_path, method: :delete, class: "text-white" %></li>
+            <li><%= link_to '관리자', admin_users_path, class: "text-white" %></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="navbar navbar-dark bg-dark">
+    <div class="container d-flex justify-content-between">
+      <a href="/" class="navbar-brand">왓챠!</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+
+
+
+<!--
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">왓챠</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <%= link_to '왓챠홈', root_path, class: "nav-item nav-link active" %><span class="sr-only">(current)</span>
+      <% if user_signed_in? %>
+        <%= link_to '로그아웃', destroy_user_session_path, method: :delete, class: "nav-item nav-link disabled" %>
+      <% else %>
+        <%= link_to '로그인', new_user_session_path, class: "nav-item nav-link"%>
+        <%= link_to '회원가입', new_user_registration_path, class: "nav-item nav-link" %>
+      <% end %>
+    </div>
+  </div>
+</nav> -->
+
+<!-- # <%= link_to '왓챠홈', root_path %>
+#
+# <% if user_signed_in? %>
+#   <%= link_to '로그아웃', destroy_user_session_path, method: :delete %><br>
+#   <%= current_user.email %>님 환영해요^.^ <br>
+# <% else %>
+#   <%= link_to '로그인', new_user_session_path %>
+#   <%= link_to '회원가입', new_user_registration_path %>
+# <% end %> -->

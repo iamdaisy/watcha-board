@@ -1,9 +1,11 @@
 <p id="notice"><%= notice %></p>
+<p id="alert"><%= alert %></p>
 
-<h1>Listing Movies</h1>
+<h1 align="center">Listing Movies</h1>
 
 
-<%= link_to 'New Movie', new_movie_path %>
+
+<div align="center"><%= link_to 'New Movie', new_movie_path %></div>
 <div class="container">
   <div class="row">
     <% @movies.each do |movie| %>

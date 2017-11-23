@@ -220,3 +220,138 @@ $ brew install heroku/brew/heroku
 
   ​
 
+#### heroku에 배포하기
+
+> git status clean 상태에서 해야함
+
+`$ heroku create`
+
+`git push heroku master`
+
+`heroku run rake db:migrate` (orm을 쓰기때문에 postresql이더라도자동변환됨)
+
+멀캠에서 포트 막아놔서 더이상 진행 못함.
+
+
+
+----
+
+
+
+### 유저관리 페이지
+
+- seed.rb 수동으로 유저 추가하기
+
+```ruby
+User.create([
+  {
+    email: "admin@asdf.com",
+    password: "123123",
+    password_confirmation: "123123",
+    role: "admin"
+  },
+  {
+    email: "yangmin@asdf.com",
+    password: "123123",
+    password_confirmation: "123123",
+    role: "regular"
+  }
+])
+```
+
+- admin_application_controller.rb 생성
+- users_controller.rb생성
+- view> admin > users > index.erb 생성
+
+
+
+- custom path로 라우츠 설정하는 방법
+
+```ruby
+  namespace :admin do
+    resources :users do
+      put :upgrade
+      put :downgrade
+    end
+  end
+```
+
+
+
+#### render로 view로직 분리하기
+
+
+
+#### 게시판 생성
+
+`rails g scaffold post title content:text photo user:references`
+
+
+
+#### AWS S3연결
+
+​	`gem 'fog-aws'`
+
+- bashrc 환경파일에 AWS_ID, AWS_SECRET 저장 후 적용(source)
+
+- config > initializers > carrierwave_fog.rb
+
+  ```ruby
+  CarrierWave.configure do |config|
+    config.fog_provider = 'fog/aws'                        # required
+    config.fog_credentials = {
+      provider:              'AWS',                        # required
+      aws_access_key_id:     ENV['AWS_ID'],                        # required
+      aws_secret_access_key: ENV['AWS_SECRET'],                        # required
+      region:                'ap-northeast-2'                  
+    }
+    config.fog_directory  = 'dahisy-4th-project'                          
+  end
+  ```
+
+
+
+
+
+### 이미지 생성
+
+- Minimagic
+
+  `gem 'mini_magick'`
+
+  `$ brew install imagemagick`
+
+
+
+- 이미지 업로더 하나 더 생성
+
+  `rails g uploader img`
+
+  - img_uploader.rb 
+
+    ```ruby
+    #comment out 할것들
+
+    include CarrierWave::MiniMagick
+
+    storage :fog 
+
+    version :thumb do       #	thumb image 생성되는 코드
+      process resize_to_fit: [50, 50]
+    end
+
+    version :small do
+      process resize_to_fit: [200, 200]
+    end
+    ```
+
+####AWS SES Service 사용하기
+
+- aws-sdk-rails
+
+  ```ruby
+  gem 'aws-sdk-rails'
+  ```
+
+  ​
+
